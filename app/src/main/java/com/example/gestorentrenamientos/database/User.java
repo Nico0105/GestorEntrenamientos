@@ -2,32 +2,33 @@ package com.example.gestorentrenamientos.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import org.jetbrains.annotations.NotNull;
-
-@Entity(tableName = "user")
+@Entity(tableName = "users")
 public class User {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "nombre")
-    private String nombre;
+    @ColumnInfo(name = "username")
+    private String username;
 
-    @ColumnInfo(name = "password")
-    private String password;
+    @ColumnInfo(name = "email")
+    private String email;
 
-    // Constructor vacío para Room
+    @ColumnInfo(name = "password_hash")
+    private String passwordHash;
+
+    @ColumnInfo(name = "created_at")
+    private long createdAt;
+
+    @ColumnInfo(name = "last_login_at")
+    private long lastLoginAt;
+
     public User() {}
 
-    // Constructor opcional para usar tú
-    public User(String nombre, String password) {
-        this.nombre = nombre;
-        this.password = password;
-    }
-
-    // GETTERS & SETTERS
+    // --- GETTERS & SETTERS ---
 
     public int getId() {
         return id;
@@ -37,20 +38,44 @@ public class User {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public long getLastLoginAt() {
+        return lastLoginAt;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setLastLoginAt(long lastLoginAt) {
+        this.lastLoginAt = lastLoginAt;
     }
 
-    public String getPassword() {
-        return password;
+    public long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
 

@@ -18,11 +18,6 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-
-        User user = new User("", "");
-        user.setNombre("Nicolas");
-        user.setPassword("1234");
-
         
     }
 }

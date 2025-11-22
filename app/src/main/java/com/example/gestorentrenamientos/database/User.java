@@ -2,7 +2,6 @@ package com.example.gestorentrenamientos.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
@@ -11,10 +10,7 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "username")
     private String username;
-
-    @ColumnInfo(name = "email")
     private String email;
 
     @ColumnInfo(name = "password_hash")
@@ -26,9 +22,20 @@ public class User {
     @ColumnInfo(name = "last_login_at")
     private long lastLoginAt;
 
+    // Constructor para registrar usuario
+    public User(String username, String email, String passwordHash) {
+        this.username = username;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.createdAt = System.currentTimeMillis();
+        this.lastLoginAt = 0;
+    }
+
+    // Constructor vacío (Room lo necesita)
     public User() {}
 
-    // --- GETTERS & SETTERS ---
+
+    // GETTERS y SETTERS
 
     public int getId() {
         return id;

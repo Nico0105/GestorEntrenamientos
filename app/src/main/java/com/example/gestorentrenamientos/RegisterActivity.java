@@ -81,9 +81,15 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (password.length() < 6) {
+        if (password.length() < 6 ) {
             etPassword.setError("Mínimo 6 caracteres");
             etPassword.requestFocus();
+            return;
+        }
+        if (password.matches("\\d+")) {
+            Toast.makeText(this, "La contraseña debe contener letras y números", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Contraseña aceptada", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Día de Entrenamiento"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <Spinner
+            android:id="@+id/spinnerDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSeleccionarEjercicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar Ejercicios"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvEjerciciosSeleccionados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ejercicios: Ninguno seleccionado"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnEliminarDia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="❌ Eliminar Día"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:textColor="@android:color/white"
+            style="?android:attr/borderlessButtonStyle" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -17,9 +17,6 @@ public interface RutinasDao {
     @Update
     void actualizarRutina(Rutinas rutina);
 
-    @Delete
-    void eliminarRutina(Rutinas rutina);
-
     // Obtener todas las rutinas de un usuario
     @Query("SELECT * FROM rutinas WHERE user_id = :userId ORDER BY created_at DESC")
     List<Rutinas> obtenerRutinasDelUsuario(int userId);
@@ -43,4 +40,7 @@ public interface RutinasDao {
     // Contar cuántas rutinas tiene un usuario
     @Query("SELECT COUNT(*) FROM rutinas WHERE user_id = :userId")
     int contarRutinasDelUsuario(int userId);
+
+    @Query("DELETE FROM rutinas WHERE id = :rutinaId")
+    void eliminarRutina(int rutinaId);
 }

@@ -50,11 +50,10 @@ public class EjerciciosPorDia {
     private String notas; // Notas específicas: "RIR 2", "Tempo 3-1-1"
 
     // Constructor
-    public EjerciciosPorDia(int DiaEntrenamiento_id, int ejercicioId, int orderIndex,
+    public EjerciciosPorDia(int DiaEntrenamiento_id, int ejercicioId,
                        int sets, int reps, float PesoKg) {
         this.DiaEntrenamiento_id = DiaEntrenamiento_id;
         this.ejercicioId = ejercicioId;
-        this.orderIndex = orderIndex;
         this.sets = sets;
         this.reps = reps;
         this.PesoKg = PesoKg;
@@ -79,6 +78,10 @@ public class EjerciciosPorDia {
     public void setNotas(String notas) {
         this.notas = notas;
     }
+
+    public int getOrderIndex() { return orderIndex; }
+
+    public void setOrderIndex(int orderIndex) { this.orderIndex = orderIndex; }
 
     public int getDescansoSeries() {
         return DescansoSeries;
@@ -110,14 +113,6 @@ public class EjerciciosPorDia {
 
     public void setSets(int sets) {
         this.sets = sets;
-    }
-
-    public int getOrderIndex() {
-        return orderIndex;
-    }
-
-    public void setOrderIndex(int orderIndex) {
-        this.orderIndex = orderIndex;
     }
 
     public int getEjercicioId() {

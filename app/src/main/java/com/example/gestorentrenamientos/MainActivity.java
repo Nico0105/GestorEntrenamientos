@@ -28,12 +28,10 @@ public class MainActivity extends AppCompatActivity {
         btnVerRutinas = findViewById(R.id.btnVerRutinas);
         tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
 
-        // Recuperar ID de usuario
         int userId = getSharedPreferences("UserPrefs", MODE_PRIVATE)
                 .getInt("USER_ID", -1); // -1 si no existe
 
         if (userId != -1) {
-            // Obtener nombre del usuario desde la base de datos de forma asíncrona
             Executors.newSingleThreadExecutor().execute(() -> {
                 User user = DatabaseClient.getInstance(getApplicationContext())
                         .getAppDatabase()
@@ -50,14 +48,12 @@ public class MainActivity extends AppCompatActivity {
             tvNombreUsuario.setText("Hola");
         }
 
-        // Botón para crear nueva rutina
         btnCrearRutina.setOnClickListener(v -> {
             Intent intent = new Intent(this, CrearRutinaActivity.class);
             intent.putExtra("user_id", userId);
             startActivity(intent);
         });
 
-        // Botón para ver rutinas creadas
         btnVerRutinas.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, VerRutinasActivity.class);
             startActivity(intent);

@@ -89,9 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.matches("\\d+")) {
             Toast.makeText(this, "La contraseña debe contener letras y números", Toast.LENGTH_SHORT).show();
             return;
-        } else {
-            Toast.makeText(this, "Contraseña aceptada", Toast.LENGTH_SHORT).show();
-            finish();
         }
 
         if (!password.equals(confirmPassword)) {
@@ -110,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                     .getAppDatabase()
                     .userDao();
 
-            // Verificar si el email ya existe
+            // Verificamos si el email del pj ya existe
             if (dao.emailExiste(email) > 0) {
                 runOnUiThread(() -> {
                     btnRegistrarse.setEnabled(true);
@@ -120,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            // Verificar si el username ya existe
+            // nos fijamos si el username ya existe
             if (dao.usernameExiste(username) > 0) {
                 runOnUiThread(() -> {
                     btnRegistrarse.setEnabled(true);
@@ -138,7 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 Toast.makeText(this, "¡Registro exitoso! Inicia sesión", Toast.LENGTH_SHORT).show();
-                finish();
             });
         });
     }

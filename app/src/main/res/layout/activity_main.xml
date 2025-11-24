@@ -9,7 +9,6 @@
     android:background="#121212"
     tools:context=".MainActivity">
 
-    <!-- Título principal -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -23,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Nombre del usuario -->
     <TextView
         android:id="@+id/tvNombreUsuario"
         android:layout_width="wrap_content"
@@ -37,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Mensaje de bienvenida -->
     <TextView
         android:id="@+id/tvBienvenida"
         android:layout_width="0dp"
@@ -51,7 +48,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Crear Rutina -->
     <Button
         android:id="@+id/btnCrearRutina"
         android:layout_width="0dp"
@@ -67,7 +63,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Ver Rutinas -->
     <Button
         android:id="@+id/btnVerRutinas"
         android:layout_width="0dp"

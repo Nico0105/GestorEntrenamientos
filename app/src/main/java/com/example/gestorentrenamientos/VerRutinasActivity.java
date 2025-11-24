@@ -366,27 +366,36 @@ public class VerRutinasActivity extends AppCompatActivity {
 
                 // Iteramos los ejercicios de ese día
                 for (int k = 0; k < diaLayout.getChildCount(); k++) {
-                    LinearLayout ejercicioLayout = (LinearLayout) diaLayout.getChildAt(k);
 
-                    if (ejercicioLayout.getChildCount() < 2) continue; // debe tener TextView + Botón
+                    View hijo = diaLayout.getChildAt(k);
+                    if (!(hijo instanceof LinearLayout)) continue;
 
-                    // El TextView es el primero
+                    LinearLayout ejercicioLayout = (LinearLayout) hijo;
+
+                    if (ejercicioLayout.getChildCount() < 2) continue;
+
                     TextView tvEjercicio = (TextView) ejercicioLayout.getChildAt(0);
 
-                    // Comparamos el id del ejercicio para actualizar solo el correcto
                     if (tvEjercicio.getTag() != null && (int) tvEjercicio.getTag() == epd.getId()) {
-                        // Actualizamos el texto
+
                         String repsText = epd.getRepsMin() + "-" + epd.getRepsMax();
+
                         Ejercicios ejercicio = DatabaseClient.getInstance(getApplicationContext())
                                 .getAppDatabase()
                                 .ejerciciosDao()
                                 .obtenerEjercicioPorId(epd.getEjercicioId());
+
                         if (ejercicio != null) {
-                            tvEjercicio.setText(ejercicio.getName() + " - " + epd.getSets() + " x " + repsText + " / " + epd.getPesoKg() + "kg");
+                            tvEjercicio.setText(
+                                    ejercicio.getName() + " - " +
+                                            epd.getSets() + " x " + repsText + " / " + epd.getPesoKg() + "kg"
+                            );
                         }
-                        return; // ya encontramos y actualizamos
+
+                        return;
                     }
                 }
+
             }
         }
     }

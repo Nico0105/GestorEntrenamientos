@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        // Validaciones
         if (email.isEmpty()) {
             etEmail.setError("Ingresa tu email");
             etEmail.requestFocus();
@@ -62,47 +61,50 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Deshabilitar botón mientras se procesa
         btnLogin.setEnabled(false);
         btnLogin.setText("Iniciando sesión...");
 
-        // Buscar usuario en la BD
         Executors.newSingleThreadExecutor().execute(() -> {
+
             UserDAO dao = DatabaseClient.getInstance(getApplicationContext())
                     .getAppDatabase()
                     .userDao();
 
-            User user = dao.getUserByEmail(email);
+            final User[] userResult = new User[1];
+            userResult[0] = dao.getUserByEmail(email);
 
             runOnUiThread(() -> {
+
                 btnLogin.setEnabled(true);
                 btnLogin.setText("INICIAR SESIÓN");
 
+                User user = userResult[0];
+
                 if (user != null && PasswordUtils.verificarPassword(password, user.getPasswordHash())) {
-                    // Login exitoso - Actualizar último login
-                    // Guardar sesión del usuario
+
+                    // Guardar sesión
                     SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                    prefs.edit().putInt("USER_ID",
-                            user.getId()).apply();
+                    prefs.edit().putInt("USER_ID", user.getId()).apply();
 
-
-                    Executors.newSingleThreadExecutor().execute(() -> {
-                        dao.ultimoLogin(user.getId(), System.currentTimeMillis());
-                    });
+                    // Actualizar último login
+                    Executors.newSingleThreadExecutor().execute(() ->
+                            dao.ultimoLogin(user.getId(), System.currentTimeMillis())
+                    );
 
                     Toast.makeText(this, "¡Bienvenido " + user.getUsername() + "!", Toast.LENGTH_SHORT).show();
 
-                    // Ir a MainActivity
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("USER_ID", user.getId());
                     intent.putExtra("USERNAME", user.getUsername());
                     startActivity(intent);
-                    finish(); // Cerrar LoginActivity
+                    finish();
+
                 } else {
                     Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                    etPassword.setText(""); // Limpiar contraseña
+                    etPassword.setText("");
                 }
             });
         });
     }
+
 }

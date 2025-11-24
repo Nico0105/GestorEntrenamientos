@@ -4,55 +4,66 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#1F1F1F">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
+        <!-- TÍTULO -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Día de Entrenamiento"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
             android:layout_marginBottom="12dp" />
 
+        <!-- SPINNER -->
         <Spinner
             android:id="@+id/spinnerDia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="48dp"
+            android:background="@drawable/spinner_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp" />
 
+        <!-- SELECCIONAR EJERCICIOS -->
         <Button
             android:id="@+id/btnSeleccionarEjercicios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Seleccionar Ejercicios"
-            android:textSize="14sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:backgroundTint="#3A3A3A"
+            android:layout_marginBottom="12dp"
+            android:drawablePadding="8dp" />
 
+        <!-- TEXTO DE EJERCICIOS -->
         <TextView
             android:id="@+id/tvEjerciciosSeleccionados"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ejercicios: Ninguno seleccionado"
-            android:textSize="12sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
+            android:textColor="#CCCCCC"
+            android:textSize="13sp"
+            android:layout_marginBottom="12dp" />
 
+        <!-- ELIMINAR DÍA -->
         <Button
             android:id="@+id/btnEliminarDia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="❌ Eliminar Día"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:textColor="@android:color/white"
-            style="?android:attr/borderlessButtonStyle" />
+            android:text="Eliminar Día"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#D9534F"
+            android:textStyle="bold" />
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

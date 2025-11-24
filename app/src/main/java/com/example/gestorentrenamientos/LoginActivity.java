@@ -1,6 +1,7 @@
 package com.example.gestorentrenamientos;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +80,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (user != null && PasswordUtils.verificarPassword(password, user.getPasswordHash())) {
                     // Login exitoso - Actualizar último login
+                    // Guardar sesión del usuario
+                    SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                    prefs.edit().putInt("USER_ID",
+                            user.getId()).apply();
+
+
                     Executors.newSingleThreadExecutor().execute(() -> {
                         dao.ultimoLogin(user.getId(), System.currentTimeMillis());
                     });

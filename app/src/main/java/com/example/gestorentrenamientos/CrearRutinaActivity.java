@@ -2,6 +2,7 @@ package com.example.gestorentrenamientos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,8 +15,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gestorentrenamientos.database.AppDatabase;
+import com.example.gestorentrenamientos.database.DatabaseClient;
+import com.example.gestorentrenamientos.database.DiaEntrenamiento;
+import com.example.gestorentrenamientos.database.EjerciciosPorDia;
+import com.example.gestorentrenamientos.database.Rutinas;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class CrearRutinaActivity extends AppCompatActivity {
 
@@ -55,8 +63,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
         Button btnSeleccionarEjercicios = diaView.findViewById(R.id.btnSeleccionarEjercicios);
         TextView tvEjerciciosSeleccionados = diaView.findViewById(R.id.tvEjerciciosSeleccionados);
 
-        ArrayAdapter<String> adapterDias = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, diasSemana);
+        ArrayAdapter<String> adapterDias = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, diasSemana);
         adapterDias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDia.setAdapter(adapterDias);
 
@@ -119,40 +126,48 @@ public class CrearRutinaActivity extends AppCompatActivity {
         String nombreRutina = etNombreRutina.getText().toString().trim();
 
         if (nombreRutina.isEmpty()) {
-            Toast.makeText(this, "⚠️ Ingresa un nombre para la rutina", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "⚠ Ingresa un nombre para la rutina", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (diasAgregados.isEmpty()) {
-            Toast.makeText(this, "⚠️ Agrega al menos un día de entrenamiento", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "⚠ Agrega al menos un día de entrenamiento", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Aquí guardarás en la base de datos
-        // Por ahora solo mostramos los datos
-        StringBuilder resumen = new StringBuilder("Rutina: " + nombreRutina + "\n\n");
+        int userId = getIntent().getIntExtra("user_id", 1);
+        AppDatabase db = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
 
-        for (int i = 0; i < diasAgregados.size(); i++) {
-            DiaView dia = diasAgregados.get(i);
-            String diaSeleccionado = dia.spinnerDia.getSelectedItem().toString();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            // 1) poner rutina
+            Rutinas rutina = new Rutinas(userId, nombreRutina, "Sin descripción");
+            long rutinaId = db.rutinasDao().insertarRutina(rutina);
 
+            // 2) pone días y ejercicios
+            for (int i = 0; i < diasAgregados.size(); i++) {
+                DiaView dia = diasAgregados.get(i);
+                String nombreDia = dia.spinnerDia.getSelectedItem().toString();
 
-            resumen.append((i + 1)).append(". ")
-                    .append(diaSeleccionado).append(" - ");
+                DiaEntrenamiento diaEntity = new DiaEntrenamiento((int) rutinaId, i + 1, nombreDia);
+                long diaId = db.diaEntrenamientoDao().insertarDia(diaEntity);
 
-            if (dia.ejerciciosIds != null && !dia.ejerciciosIds.isEmpty()) {
-                resumen.append(" (").append(dia.ejerciciosIds.size()).append(" ejercicios)");
+                if (dia.ejerciciosIds != null) {
+                    for (int j = 0; j < dia.ejerciciosIds.size(); j++) {
+                        int ejercicioId = dia.ejerciciosIds.get(j);
+                        EjerciciosPorDia epd = new EjerciciosPorDia((int) diaId, ejercicioId, 3, 10, 8, 0);
+                        epd.setOrderIndex(j + 1);
+                        db.ejerciciosPorDiaDao().insertarEjercicioPorDia(epd);
+                    }
+                }
             }
-            resumen.append("\n");
-        }
 
-        Toast.makeText(this, resumen.toString(), Toast.LENGTH_LONG).show();
-
-        // TODO: Guardar en base de datos usando Room
-        // finish(); // Cerrar activity después de guardar
+            runOnUiThread(() -> {
+                Toast.makeText(CrearRutinaActivity.this, "Rutina guardada correctamente ✔", Toast.LENGTH_SHORT).show();
+                finish(); // cierra CrearRutinaActivity y vuelve a VerRutinasActivity
+            });
+        });
     }
 
-    // Clase auxiliar para manejar cada día
     private static class DiaView {
         View view;
         Spinner spinnerDia;

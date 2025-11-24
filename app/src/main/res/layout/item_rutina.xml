@@ -1,52 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cardRoot"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:background="@android:color/white"
-    android:elevation="4dp"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#1E1E1E">
 
-    <!-- Nombre de la rutina -->
-    <TextView
-        android:id="@+id/tvNombreRutina"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rutina Push/Pull"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"/>
-
-    <!-- Contenedor para los días -->
     <LinearLayout
-        android:id="@+id/containerDiasRutina"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"/>
+        android:padding="16dp">
 
-    <!-- Botones de acción -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="8dp">
-
-        <Button
-            android:id="@+id/btnEditarRutina"
-            android:layout_width="wrap_content"
+        <!-- Nombre de la rutina -->
+        <TextView
+            android:id="@+id/tvNombreRutina"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar"/>
+            android:text="Rutina Push/Pull"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/btnEliminarRutina"
-            android:layout_width="wrap_content"
+        <!-- Contenedor para los días -->
+        <LinearLayout
+            android:id="@+id/containerDiasRutina"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:layout_marginStart="8dp"/>
+            android:orientation="vertical"
+            android:layout_marginTop="12dp" />
+
+        <!-- Botones de acción -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏋️‍♂️ Editar"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#3A3A3A"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <Button
+                android:id="@+id/btnEliminarRutina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="🗑️ Eliminar"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#B00020"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

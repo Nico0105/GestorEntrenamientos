@@ -88,9 +88,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
         if (password.matches("\\d+")) {
             Toast.makeText(this, "La contraseña debe contener letras y números", Toast.LENGTH_SHORT).show();
+            return;
         } else {
             Toast.makeText(this, "Contraseña aceptada", Toast.LENGTH_SHORT).show();
-            return;
+            finish();
         }
 
         if (!password.equals(confirmPassword)) {

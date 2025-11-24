@@ -173,13 +173,8 @@ public class SeleccionarEjerciciosActivity extends AppCompatActivity {
             }
         }
 
-        if (ejerciciosSeleccionados.isEmpty()) {
-            Toast.makeText(this, "Selecciona al menos un ejercicio", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         Intent resultIntent = new Intent();
-        resultIntent.putIntegerArrayListExtra("EJERCICIOS_IDS", ejerciciosSeleccionados);
+        resultIntent.putIntegerArrayListExtra("EJERCICIOS_IDS", ejerciciosSeleccionados); // puede estar vacía
         resultIntent.putExtra("EJERCICIOS_TEXTO", nombresEjercicios.toString());
         setResult(RESULT_OK, resultIntent);
         finish();

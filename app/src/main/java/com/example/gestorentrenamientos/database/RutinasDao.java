@@ -18,7 +18,7 @@ public interface RutinasDao {
     void actualizarRutina(Rutinas rutina);
 
     // Obtener todas las rutinas de un usuario
-    @Query("SELECT * FROM rutinas WHERE user_id = :userId ORDER BY created_at DESC")
+    @Query("SELECT * FROM rutinas WHERE user_id = :userId")
     List<Rutinas> obtenerRutinasDelUsuario(int userId);
 
     // Obtener la rutina activa del usuario

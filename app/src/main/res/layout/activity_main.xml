@@ -6,45 +6,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="#121212"
     tools:context=".MainActivity">
 
+    <!-- Título principal -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:text="Gestor de Entrenamientos"
-        android:textColor="@color/white"
+        android:textColor="#E0E0E0"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Nombre del usuario -->
+    <TextView
+        android:id="@+id/tvNombreUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hola, Nico"
+        android:textColor="#FFD700"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Mensaje de bienvenida -->
+    <TextView
+        android:id="@+id/tvBienvenida"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido a tu gestor personal de rutinas. ¡Vamos a entrenar!"
+        android:textColor="#B0B0B0"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón Crear Rutina -->
     <Button
         android:id="@+id/btnCrearRutina"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:padding="16dp"
-        android:text="📝 Crear Nueva Rutina"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/boton_bg"
+        android:backgroundTint="#1C1C1C"
+        android:text="🦾 Crear Nueva Rutina"
+        android:textColor="#E6E6E6"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvBienvenida"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Botón Ver Rutinas -->
     <Button
         android:id="@+id/btnVerRutinas"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:padding="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/boton_bg"
+        android:backgroundTint="#1C1C1C"
         android:text="📋 Ver Mis Rutinas"
+        android:textColor="#E6E6E6"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/btnCrearRutina"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCrearRutina" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

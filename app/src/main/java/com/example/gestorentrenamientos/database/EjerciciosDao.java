@@ -11,6 +11,7 @@ import java.util.List;
 @Dao
 public interface EjerciciosDao {
 
+
     @Insert
     void insertarEjercicio(Ejercicios ejercicio);
 
@@ -22,6 +23,9 @@ public interface EjerciciosDao {
 
     @Delete
     void eliminarEjercicio(Ejercicios ejercicio);
+
+    @Query("DELETE FROM Ejercicios")
+    void borrarTodos();
 
     // Obtener todos los ejercicios
     @Query("SELECT * FROM ejercicios ORDER BY name ASC")

@@ -39,7 +39,8 @@ public class EjerciciosPorDia {
     private int orderIndex; // Orden del ejercicio en el día (1, 2, 3...)
 
     private int sets; // Número de series
-    private int reps; // Repeticiones
+    private int repsMin;
+    private int repsMax;
 
     @ColumnInfo(name = "PesoKg")
     private float PesoKg; // Peso en kg
@@ -51,11 +52,12 @@ public class EjerciciosPorDia {
 
     // Constructor
     public EjerciciosPorDia(int DiaEntrenamiento_id, int ejercicioId,
-                       int sets, int reps, float PesoKg) {
+                       int sets, int repsMax, int repsMin,float PesoKg) {
         this.DiaEntrenamiento_id = DiaEntrenamiento_id;
         this.ejercicioId = ejercicioId;
         this.sets = sets;
-        this.reps = reps;
+        this.repsMin = repsMin;
+        this.repsMax = repsMax;
         this.PesoKg = PesoKg;
         this.DescansoSeries = 90; // Default 90 segundos
     }
@@ -99,13 +101,11 @@ public class EjerciciosPorDia {
         PesoKg = pesoKg;
     }
 
-    public int getReps() {
-        return reps;
-    }
+    public int getRepsMin() { return repsMin; }
+    public void setRepsMin(int repsMin) { this.repsMin = repsMin; }
 
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
+    public int getRepsMax() { return repsMax; }
+    public void setRepsMax(int repsMax) { this.repsMax = repsMax; }
 
     public int getSets() {
         return sets;

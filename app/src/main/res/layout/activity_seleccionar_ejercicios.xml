@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#121212">
 
+    <!-- TÍTULO -->
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
@@ -12,37 +14,40 @@
         android:text="Seleccionar Ejercicios"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp" />
 
+    <!-- GRUPOS MUSCULARES -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Grupos Musculares:"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="#CCCCCC"
         android:layout_marginBottom="8dp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="120dp"
+        android:maxHeight="140dp"
         android:padding="8dp">
 
         <LinearLayout
             android:id="@+id/containerFiltros"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
-
+            android:orientation="vertical" />
     </ScrollView>
 
+    <!-- EJERCICIOS -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ejercicios:"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="#CCCCCC"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp" />
 
@@ -51,24 +56,27 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-
         <LinearLayout
             android:id="@+id/containerEjercicios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
-
+            android:orientation="vertical"
+            android:divider="@android:color/darker_gray"
+            android:showDividers="middle"
+            android:dividerPadding="6dp"/>
     </ScrollView>
 
+    <!-- BOTÓN CONFIRMAR -->
     <Button
         android:id="@+id/btnConfirmarSeleccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="✅ Confirmar Selección"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:padding="16dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:textColor="@android:color/white" />
-
+        android:backgroundTint="#3C6E47"
+        android:textColor="#FFFFFF"
+        android:drawablePadding="8dp"/>
 </LinearLayout>

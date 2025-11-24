@@ -354,52 +354,6 @@ public class VerRutinasActivity extends AppCompatActivity {
         });
     }
 
-    private void actualizarEjercicioEnUI(EjerciciosPorDia epd) {
-        // Iteramos sobre todas las cards de rutinas
-        for (int i = 0; i < containerRutinas.getChildCount(); i++) {
-            View cardView = containerRutinas.getChildAt(i);
-            LinearLayout containerDias = cardView.findViewById(R.id.containerDiasRutina);
-
-            // Iteramos los días
-            for (int j = 0; j < containerDias.getChildCount(); j++) {
-                LinearLayout diaLayout = (LinearLayout) containerDias.getChildAt(j);
-
-                // Iteramos los ejercicios de ese día
-                for (int k = 0; k < diaLayout.getChildCount(); k++) {
-
-                    View hijo = diaLayout.getChildAt(k);
-                    if (!(hijo instanceof LinearLayout)) continue;
-
-                    LinearLayout ejercicioLayout = (LinearLayout) hijo;
-
-                    if (ejercicioLayout.getChildCount() < 2) continue;
-
-                    TextView tvEjercicio = (TextView) ejercicioLayout.getChildAt(0);
-
-                    if (tvEjercicio.getTag() != null && (int) tvEjercicio.getTag() == epd.getId()) {
-
-                        String repsText = epd.getRepsMin() + "-" + epd.getRepsMax();
-
-                        Ejercicios ejercicio = DatabaseClient.getInstance(getApplicationContext())
-                                .getAppDatabase()
-                                .ejerciciosDao()
-                                .obtenerEjercicioPorId(epd.getEjercicioId());
-
-                        if (ejercicio != null) {
-                            tvEjercicio.setText(
-                                    ejercicio.getName() + " - " +
-                                            epd.getSets() + " x " + repsText + " / " + epd.getPesoKg() + "kg"
-                            );
-                        }
-
-                        return;
-                    }
-                }
-
-            }
-        }
-    }
-
     private void agregarSeriesReps(int ejercicioPorDiaId, int sets, int repsMin, int repsMax, float peso){
         Executors.newSingleThreadExecutor().execute(() ->{
             AppDatabase db = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
@@ -414,9 +368,7 @@ public class VerRutinasActivity extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     Toast.makeText(this, "✅ Ejercicio actualizado", Toast.LENGTH_SHORT).show();
-
-                    // 🔹 Aquí actualizamos solo el layout del día
-                    actualizarEjercicioEnUI(epd);
+                    cargarRutinas();
                 });
             } else {
                 runOnUiThread(() ->

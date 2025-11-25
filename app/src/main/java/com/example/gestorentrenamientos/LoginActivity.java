@@ -61,6 +61,24 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        //LOGIN ADMIN
+        if(email.equals("admin@gmail.com") && password.equals("admin01")) {
+
+            // Guardar sesión como ADMIN
+            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            prefs.edit()
+                    .putBoolean("IS_ADMIN", true)
+                    .apply();
+
+            Toast.makeText(this, "Bienvenido Administrador", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+
         btnLogin.setEnabled(false);
         btnLogin.setText("Iniciando sesión...");
 
@@ -84,7 +102,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     // Guardar sesión
                     SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                    prefs.edit().putInt("USER_ID", user.getId()).apply();
+                    prefs.edit()
+                            .putInt("USER_ID", user.getId())
+                            .putBoolean("IS_ADMIN", false)
+                            .apply();
 
                     // Actualizar último login
                     Executors.newSingleThreadExecutor().execute(() ->

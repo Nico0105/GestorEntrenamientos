@@ -49,17 +49,13 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
-    // DAOs
+    // DAOS
     public abstract UserDAO userDao();
     public abstract EjerciciosDao ejerciciosDao();
     public abstract RutinasDao rutinasDao();
     public abstract DiaEntrenamientoDao diaEntrenamientoDao();
     public abstract EjerciciosPorDiaDao ejerciciosPorDiaDao();
 
-
-    private static void cargarRutinasPredefinidas(RutinasDao dao){
-        dao.insertarRutina(new Rutinas(1, "PPL", "Push, Pull, Legs"));
-    }
 
     private static void cargarEjerciciosPredefinidos(EjerciciosDao dao) {
         // ============ PECHO ============

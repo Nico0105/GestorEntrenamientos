@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#1A1A1A"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvNombreEjercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre ejercicio"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvDescripcionEjercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción acá"
+        android:textColor="#CCCCCC"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/btnVerVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="▶ Ver video"
+        android:textColor="#4FC3F7"
+        android:textSize="16sp"
+        android:layout_marginTop="6dp" />
+</LinearLayout>

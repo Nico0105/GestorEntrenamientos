@@ -22,14 +22,18 @@ public class Ejercicios {
     @ColumnInfo(name = "nivel_dificultad")
     private String nivelDificultad; // ← minúscula inicial
 
+    @ColumnInfo(name = "video_url")
+    private String videoUrl;
+
     // Constructor
     public Ejercicios(String name, String description, String grupoMuscular,
-                      String equipamiento, String nivelDificultad) {
+                      String equipamiento, String nivelDificultad, String videoUrl) {
         this.name = name;
         this.description = description;
         this.grupoMuscular = grupoMuscular;
         this.equipamiento = equipamiento;
         this.nivelDificultad = nivelDificultad;
+        this.videoUrl = videoUrl;
     }
 
     // Getters y Setters actualizados
@@ -50,4 +54,7 @@ public class Ejercicios {
 
     public String getNivelDificultad() { return nivelDificultad; }
     public void setNivelDificultad(String nivelDificultad) { this.nivelDificultad = nivelDificultad; }
+
+    public String getVideoUrl() { return videoUrl; }
+    public void setVideoUrl(String videoUrl) { this.videoUrl = videoUrl; }
 }

@@ -2,6 +2,7 @@ package com.example.gestorentrenamientos;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.InputType;
@@ -448,13 +449,59 @@ public class VerRutinasActivity extends AppCompatActivity {
                     tvEjercicio.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
                     ejercicioLayout.addView(tvEjercicio);
 
-
                     Button btnEditarSeries = new Button(this);
                     btnEditarSeries.setText("🏋️‍♂️");
                     btnEditarSeries.setOnClickListener(v -> abrirDialogoSeriesReps(epd.getId()));
                     ejercicioLayout.addView(btnEditarSeries);
 
+                    // BOTÓN DE VIDEO
+                    Button btnVideo = new Button(this);
+                    btnVideo.setText("▶");
+                    btnVideo.setTextSize(14);
+                    //le saco los styles al btn para que no se me agrande y no me "mueva" nada
+                    btnVideo.setBackground(null);
+                    btnVideo.setMinHeight(0);
+                    btnVideo.setMinimumHeight(0);
+                    btnVideo.setMinWidth(0);
+                    btnVideo.setMinimumWidth(0);
+                    btnVideo.setPadding(4, 2, 4, 2);
+
+                    LinearLayout.LayoutParams paramsVideo = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    paramsVideo.setMargins(16, 0, 0, 0);
+                    btnVideo.setLayoutParams(paramsVideo);
+
+                    String url = ejercicio.getVideoUrl();
+
+                    // Caso SIN VIDEO
+                    if (url == null || url.trim().isEmpty() || url.equalsIgnoreCase("sin video")) {
+                        btnVideo.setText("X");
+                        btnVideo.setEnabled(false);
+                        btnVideo.setTextSize(12);
+                        btnVideo.setAlpha(0.4f);
+
+                        // Igual sin inflamiento
+                        btnVideo.setBackground(null);
+                        btnVideo.setPadding(4, 2, 4, 2);
+
+                    // Caso CON VIDEO
+                    } else {
+                        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                            url = "https://" + url;
+                        }
+                        String finalUrl = url;
+
+                        btnVideo.setOnClickListener(v -> {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(finalUrl));
+                            startActivity(intent);
+                        });
+                    }
+
+                    ejercicioLayout.addView(btnVideo);
                     container.addView(ejercicioLayout);
+
                 }
             });
         });
